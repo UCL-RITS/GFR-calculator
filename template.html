@@ -19,13 +19,16 @@
 	<link rel="apple-touch-icon-precomposed" href="favicon-152.png">
 
   <!-- Including bootstrap -->
+  <!-- jquery are required by bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- end of jquery -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<!-- end of bootstrap -->
+  <!-- end of bootstrap -->
 
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-TileImage" content="favicon-144.png">
@@ -59,16 +62,17 @@
 			var sodium = parseInt(document.getElementById("sodium").value, 10);
 			var inr = parseInt(document.getElementById("inr").value, 10);
 
-	    var display = document.getElementById("display");
-	    display.innerHTML = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(sodium, -0.972) * Math.pow(inr, -0.113);
+	  var output = document.getElementById("output_text");
+	  output.innerHTML =  45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(sodium, -0.972) * Math.pow(inr, -0.113);
 
-			document.getElementById("result_button").className = "hidden";
+		document.getElementById("result_button").className = "hidden";
+		document.getElementById("output").className = "show";
 			return false;
 	}
 
 	function restore_result_button(){
 		document.getElementById("result_button").className = "submit";
-		document.getElementById("display").innerHTML = null;
+		document.getElementById("output").className = "hidden";
 
 	}
 
@@ -124,7 +128,7 @@
 					</article>
 
 </br>
-
+         <div class="well">
 					<form action="#" class="form">
 						<fieldset class="form__group">
 
@@ -192,20 +196,28 @@
 					        <label for="text">INR</label>
 					        <input class="form__control" type="text" id="inr" placeholder="Normal: 1 - 2" onFocus="restore_result_button()">
 					      </fieldset>
+            </fieldset>
+				  </form>
+        	<div id="display">
+            <div class="row">
+               <div class="col-xs-12">
+								 <div class="submit">
+                   <div id="result_button" class="show">
+									   <input type="button" value="Calculate" class="btn btn--gradient btn-primary btn-block" onClick="return gfr()">
+                   </div>
+                   <div id="output" class="hidden">
+                     <h3 class="flat-top text-primary">
+                       <span class="label label-success col-xs-12" id="output_text"></span>
+                     </h3>
+                  </div>
+				        </div> <!-- submit -->
+               </div> <!-- col-xs-12 -->
+            </div>     <!-- row -->
+					</div> <!-- display -->
+         </div>  <!-- well -->
 
-								<div class="submit" id="result_button">
-									<input type="button" value="Result" class="btn btn--gradient" onClick="return gfr()">
-								</div>
-						</fieldset>
-					</form>
 
-					<div id="display">
-					</div>
-
-				</div>
-
-
-				<!-- end main slot where silva content gets rendered-->
+        </div> <!-- end main slot where silva content gets rendered-->
 
 			</div>
 
