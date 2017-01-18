@@ -78,16 +78,11 @@
 	  var output = document.getElementById("output_text");
 	  output.innerHTML =  45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(sodium, -0.972) * Math.pow(inr, -0.113);
 
-		document.getElementById("result_button").className = "hidden";
-		document.getElementById("output").className = "show";
+
 			return false;
 	}
 
-	function restore_result_button(){
-		document.getElementById("result_button").className = "submit";
-		document.getElementById("output").className = "hidden";
 
-	}
 
 </script>
 
@@ -175,93 +170,156 @@
 					</article>
 
 </br>
-         <div class="well">
-					<form action="#" class="form">
-						<fieldset class="form__group">
 
-								<fieldset class="form__group form__group--inline">
-									<label for="text">Gender</label>
-									<input class="form__control" type="text" id="gender" onFocus="restore_result_button()">
-								</fieldset>
-
-								<!-- <label class="radio-inline">
-									<input type="radio" name="genderopt">Female
-								</label>
-								<label class="radio-inline">
-									<input type="radio" name="genderopt">Male
-								</label>
- -->
-
-								<!-- <fieldset class="form__group form__group--inline">
-					        <label for="select">Gender</label>
-					        <select class="form__control" id="gender">
-					            <option>Option One</option>
-					            <option>Option Two</option>
-					            <option>Option Three</option>
-					        </select>
-					      </fieldset> -->
+			<div class="well">
+</br>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="text">Gender</span></h3>
+					</div>
+					<div class="btn-group-lg col-xs-7" role="group" aria-label="...">
+					  <button type="button" class="btn-info">Female</button>
+					  <button type="button" class="btn-info">Male</button>
+					</div>
+				</div>
+</br>
 
 
-								<fieldset class="form__group form__group--inline">
-									<label for="phone">Age</label>
-								  <input class="form__control" type="number" name="age" min="0" max="110" onFocus="restore_result_button()">
-								</fieldset>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="phone">Age</label></h3>
+					</div>
+					<div class="col-xs-7">
+						<input class="form-control input-lg" type="number" name="age" min="0" max="110">
+					</div>
+				</div>
+</br>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="select">Ascites</label></h3>
+					</div>
+					<div class="btn-group-lg col-xs-7" role="group" aria-label="...">
+					  <button type="button" class="btn-info">Low</button>
+					  <button type="button" class="btn-info">Moderate</button>
+						<button type="button" class="btn-info">Severe</button>
+					</div>
+				</div>
+</br>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="text">Creatinine</label></h3>
+					</div>
+					<div class="col-xs-4">
+						<input class="form-control input-lg" type="text" id="creatinine">
+					</div>
+
+						<div class="btn-group col-xs-3">
+							<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown">
+								<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">mmol/L</a></li>
+								<li><a href="#">umol/dL</a></li>
+							</ul>
+					</div>
+				</div>
+</br>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="text">Sodium</label></h3>
+					</div>
+					<div class="col-xs-4">
+						<input class="form-control input-lg" type="text" id="sodium">
+					</div>
+					<div class="btn-group col-xs-3">
+						<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown">
+							<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">mmol/L</a></li>
+							<li><a href="#">umol/dL</a></li>
+						</ul>
+				</div>
+				</div>
+</br>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="text">Urea</label></h3>
+					</div>
+					<div class="col-xs-4">
+						<input class="form-control input-lg" type="text" id="urea">
+					</div>
+					<div class="btn-group col-xs-3">
+						<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown">
+							<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">mmol/L</a></li>
+							<li><a href="#">umol/dL</a></li>
+						</ul>
+				</div>
+				</div>
+</br>
+				<div class="row">
+					<div class="col-xs-1">
+					</div>
+					<div class="col-xs-3">
+						<h3><span for="text">INR</label></h3>
+					</div>
+					<div class="col-xs-7">
+						<input class="form-control input-lg" type="text" id="inr">
+					</div>
+				</div>
+</br>
+</br>
+
+<div id="display">
+	<div class="row">
+		<div class="col-xs-4"></div>
+		<div class="col-xs-4">
+			<div class="submit">
+				<div id="result_button" class="show">
+					<center><button type="button" id="result_button" class="btn-primary btn-lg" onClick="return gfr()">Calculate</button></center>
+				</div>
+				<!-- <div id="output" class="hidden">
+					<h2 class="flat-top text-primary">
+						<span class="label label-success col-xs-4" id="output_text"></span>
+					</h2>
+				</div> -->
+			</div> <!-- submit -->
+		</div> <!-- col-xs-12 -->
+	</div>     <!-- row -->
+</div> <!-- display -->
 
 
-								<!-- <label class="radio-inline">
-						      <input type="radio" name="optradio">Mild
-						    </label>
-						    <label class="radio-inline">
-						      <input type="radio" name="optradio">Moderate
-						    </label>
-						    <label class="radio-inline">
-						      <input type="radio" name="optradio">Severe
-						    </label> -->
 
-								<fieldset class="form__group form__group--inline">
-									<label for="select">Ascites</label>
-									<input class="form__control" type="text" id="ascites"  onFocus="restore_result_button()">
-								</fieldset>
+</br>
+      </div>
+			<div class="well well-lg" id="output">
+				<div class="row">
+					<div class="col-xs-4"></div>
+					<div class="col-xs-4">
+					</br>
+						<h1>
+							<center><span id="output_text">...</span></center>
+						</h1>
+					</div>
+				</div>
+			</div>
 
-								<fieldset class="form__group form__group--inline">
-					        <label for="text">Creatinine</label>
-					        <input class="form__control" type="text" id="creatinine" placeholder="Normal: 0.7 to 1.3 mg/dL" onFocus="restore_result_button()">
 
-								</fieldset>
-
-								<fieldset class="form__group form__group--inline">
-					        <label for="text">Sodium</label>
-					        <input class="form__control" type="text" id="sodium" placeholder="Normal: 135 and 145 mmol/L" onFocus="restore_result_button()">
-					      </fieldset>
-
-								<fieldset class="form__group form__group--inline">
-					        <label for="text">Urea</label>
-					        <input class="form__control" type="text" id="urea" placeholder="Normal: 7 to 20 mg/dL"  onFocus="restore_result_button()">
-					      </fieldset>
-
-								<fieldset class="form__group form__group--inline" >
-					        <label for="text">INR</label>
-					        <input class="form__control" type="text" id="inr" placeholder="Normal: 1 - 2" onFocus="restore_result_button()">
-					      </fieldset>
-            </fieldset>
-				  </form>
-        	<div id="display">
-            <div class="row">
-               <div class="col-xs-12">
-								 <div class="submit">
-                   <div id="result_button" class="show">
-									   <input type="button" value="Calculate" class="btn btn--gradient btn-primary btn-block" onClick="return gfr()">
-                   </div>
-                   <div id="output" class="hidden">
-                     <h3 class="flat-top text-primary">
-                       <span class="label label-success col-xs-12" id="output_text"></span>
-                     </h3>
-                  </div>
-				        </div> <!-- submit -->
-               </div> <!-- col-xs-12 -->
-            </div>     <!-- row -->
-					</div> <!-- display -->
-         </div>  <!-- well -->
 
 
         </div> <!-- end main slot where silva content gets rendered-->
