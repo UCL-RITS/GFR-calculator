@@ -171,44 +171,42 @@
      <div class="bs">
 			<div class="well">
 </br>
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="text">Gender</span></h3>
-					</div>
-					<div class="btn-group-lg col-xs-7" role="group" aria-label="...">
-					  <button type="button" class="btn-info">Female</button>
-					  <button type="button" class="btn-info">Male</button>
-					</div>
-				</div>
-</br>
 
 
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="phone">Age</label></h3>
-					</div>
-					<div class="col-xs-7">
-						<input class="form-control input-lg" type="number" name="age" min="0" max="110">
-					</div>
-				</div>
-</br>
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="select">Ascites</label></h3>
-					</div>
-					<div class="btn-group-lg col-xs-7" role="group" aria-label="...">
-					  <button type="button" class="btn-info">Low</button>
-					  <button type="button" class="btn-info">Moderate</button>
-						<button type="button" class="btn-info">Severe</button>
-					</div>
-				</div>
-</br>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">Gender</label>
+    <div class="col-xs-7">
+      <div class="btn-group btn-group-justified" data-toggle="buttons">
+        <label class="btn btn-info">
+          <input type="radio" name="options" id="Gender_female"> Female
+        </label>
+        <label class="btn btn-info">
+          <input type="radio" name="options" id="Gender_male"> Male
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">Age</label>
+    <div class="col-xs-7">
+      <input class="form-control input-lg" type="number" name="age" min="0" max="110">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">Ascites</label>
+    <div class="col-xs-7">
+      <div class="btn-group btn-group-justified" data-toggle="buttons">
+        <label class="btn btn-info">
+          <input type="radio" name="options" id="ascites"> Moderate/Severe
+        </label>
+      </div>
+    </div>
+  </div>
+
+</form>
 				<div class="row">
 					<div class="col-xs-1">
 					</div>
