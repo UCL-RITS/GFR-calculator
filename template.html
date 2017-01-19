@@ -7,18 +7,24 @@
 	<meta name="author" content="UCL-RITS" />
 	<meta name="description" content="GFR Calculator" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- social meta -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@uclnews">
+	<meta name="twitter:title" content="UCL - London's Global University">
+	<meta name="twitter:description" content="UCL (University College London) is London's leading multidisciplinary university, with 8,000 staff and 25,000 students.">
+	<meta name="twitter:creator" content="@UCLWAMS">
+	<meta name="twitter:image:src" content="http://www.ucl.ac.uk/visual-identity/logos/standalone.png">
+	<meta property="og:image" content="http://www.ucl.ac.uk/visual-identity/logos/standalone.png"/>
+	<meta property="og:title" content="UCL - London's Global University"/>
+	<meta property="og:url" content="http://www.ucl.ac.uk"/>
+	<meta property="og:site_name" content="UCL"/>
+	<meta property="og:description" content="UCL (University College London) is London's leading multidisciplinary university, with 8,000 staff and 25,000 students."/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:profile_id" content="uclofficial"/>
+	<!-- end social meta -->
 	<title>GFR Calculator</title>
 
-	<link href="https://static.ucl.ac.uk/indigo/css/screen.min.css" media="screen, projection" rel="stylesheet" type="text/css" />
-
-	<!--[if IE]><link href="https://static.ucl.ac.uk/indigo/css/ie.min.css" rel="stylesheet" /><![endif]-->
-	<!--[if lt IE 8]><link href="https://static.ucl.ac.uk/indigo/css/ie-old.min.css" rel="stylesheet" /><![endif]-->
-
-
-	<link rel="shortcut icon" href="https://static.ucl.ac.uk/indigo/images/favicon.ico" />
-	<link rel="apple-touch-icon-precomposed" href="favicon-152.png">
-
-  <!-- Including bootstrap -->
+	<!-- Including bootstrap -->
   <!-- jquery are required by bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!-- end of jquery -->
@@ -30,6 +36,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <!-- end of bootstrap -->
 
+	<link href="https://static.ucl.ac.uk/indigo/css/screen.min.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+	<!--[if IE]><link href="https://static.ucl.ac.uk/indigo/css/ie.min.css" rel="stylesheet" /><![endif]-->
+	<!--[if lt IE 8]><link href="https://static.ucl.ac.uk/indigo/css/ie-old.min.css" rel="stylesheet" /><![endif]-->
+
+	<link rel="shortcut icon" href="https://static.ucl.ac.uk/indigo/images/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon-152.png">
 	<meta name="msapplication-TileColor" content="#000000">
 	<meta name="msapplication-TileImage" content="favicon-144.png">
 
@@ -86,11 +99,45 @@
 
 </head>
 
-<body id="index" class="layout-vertical">
+<body id="index" class="layout-vertical layout-vertical--nav-2col
+">
 
 	<header class="header header--desktop">
 
 		<a class="header__close" href="#"><img src="https://cdn.ucl.ac.uk/indigo/images/close.png" alt="X" />Close</a>
+
+		<div class="masthead">
+
+			<div class="wrapper clearfix">
+
+				<div class="masthead__search">
+					<form action="https://search2.ucl.ac.uk/s/search.html" method="get">
+						<div class="search-form">
+							<input type="search" placeholder="Search UCL websites, people and more" class="search-form__input search-form__input--search" value="">
+						</div>
+						<input type="hidden" name="collection" value="website-meta">
+		                <input type="hidden" name="profile" value="_website">
+		                <input type="hidden" name="tab" value="websites">
+		                <input type="submit" name="submit" value="Go" class="btn btn--primary search-form__input search-form__input--submit" />
+					</form>
+				</div>
+
+
+				<nav class="masthead__nav m-clear">
+                    <ul class="masthead__list">
+                        <li class="masthead__item"><a href="/" class="masthead__link">UCL Home</a>
+                        </li>
+                        <li class="masthead__item"><a href="/prospective-students" class="masthead__link">Prospective students</a>
+                        </li>
+                        <li class="masthead__item"><a href="/students" class="masthead__link">Current students</a>
+                        </li>
+                        <li class="masthead__item"><a href="/staff" class="masthead__link">Staff</a>
+                        </li>
+                    </ul>
+                </nav>
+			</div>
+
+		</div><!-- end .masthead -->
 
 		<div class="wrapper">
 
@@ -179,7 +226,7 @@
 								<fieldset class="form__group form__group--inline">
 					        <label for="text">Creatinine</label>
 					        <input class="form__control" type="text" id="creatinine" placeholder="Normal: 0.7 to 1.3 mg/dL" onFocus="restore_result_button()">
-									
+
 								</fieldset>
 
 								<fieldset class="form__group form__group--inline">
