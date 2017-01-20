@@ -67,14 +67,16 @@
 		globalSiteSpecificVars.pathToJquery = "https://static.ucl.ac.uk/indigo/js/lib/jquery-2.1.1.min";
 	}
 
-	function gfr(){
-	    var creatinine = parseInt(document.getElementById("creatinine").value, 10);
-			var urea = parseInt(document.getElementById("urea").value, 10);
-			var sodium = parseInt(document.getElementById("sodium").value, 10);
-			var inr = parseInt(document.getElementById("inr").value, 10);
-
-	  var output = document.getElementById("output_text");
-	  output.innerHTML =  45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(sodium, -0.972) * Math.pow(inr, -0.113);
+	  function gfr(){
+      var age = parseInt(document.getElementById("age").value, 10);
+      var creatinine = parseInt(document.getElementById("creatinine").value, 10);
+      var urea = parseInt(document.getElementById("urea").value, 10);
+      var sodium = parseInt(document.getElementById("sodium").value, 10);
+      var inr = parseInt(document.getElementById("inr").value, 10);
+      var female = document.getElementById('Gender_female').checked ? 0.809 : 1;
+      var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
+      var output = document.getElementById("output_text");
+      output.innerHTML = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, -0.972) * female * ascites;
 
 
 			return false;
@@ -176,13 +178,13 @@
 <form class="form-horizontal">
   <div class="form-group">
     <label class="col-xs-3 control-label" for="">Gender</label>
-    <div class="col-xs-7">
+    <div class="col-xs-7" id="gender">
       <div class="btn-group btn-group-justified" data-toggle="buttons">
         <label class="btn btn-info">
-          <input type="radio" name="options" id="Gender_female"> Female
+          <input type="radio" name="gender" id="Gender_female"> Female
         </label>
         <label class="btn btn-info">
-          <input type="radio" name="options" id="Gender_male"> Male
+          <input type="radio" name="gender" id="Gender_male"> Male
         </label>
       </div>
     </div>
@@ -191,7 +193,7 @@
   <div class="form-group">
     <label class="col-xs-3 control-label" for="">Age</label>
     <div class="col-xs-7">
-      <input class="form-control input-lg" type="number" name="age" min="0" max="110">
+      <input class="form-control input-lg" type="number" name="age" id="age" min="0" max="110">
     </div>
   </div>
 
@@ -206,111 +208,66 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">Creatinine</label>
+    <div class="col-xs-4">
+      <input class="form-control input-lg" type="number" name="creatinine" id="creatinine" min="0" max="110">
+    </div>
+    <div class="col-xs-3 input-lg">
+      <select class="custom-select" id="creatinine_units">
+        <option selected>Units</option>
+        <option value="1">mmol/L</option>
+        <option value="2">umol/dL</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">Sodium</label>
+    <div class="col-xs-4">
+      <input class="form-control input-lg" type="number" name="sodium" id="sodium" min="0" max="110">
+    </div>
+    <div class="col-xs-3 input-lg">
+      <select class="custom-select" id="sodium_value">
+        <option selected>Units</option>
+        <option value="1">mmol/L</option>
+        <option value="2">umol/dL</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">Urea</label>
+    <div class="col-xs-4">
+      <input class="form-control input-lg" type="number" name="urea" id="urea" min="0" max="110">
+    </div>
+    <div class="col-xs-3 input-lg">
+      <select class="custom-select" id="urea_value">
+        <option selected>Units</option>
+        <option value="1">mmol/L</option>
+        <option value="2">umol/dL</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="">INR</label>
+    <div class="col-xs-7">
+      <input class="form-control input-lg" type="number" name="inr" id="inr" min="0" max="110">
+    </div>
+  </div>
+
+  <button type="btn" class="btn btn-primary center-block btn-lg" onClick="return gfr()">Calculate</button>
+
 </form>
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="text">Creatinine</label></h3>
-					</div>
-					<div class="col-xs-4">
-						<input class="form-control input-lg" type="text" id="creatinine">
-					</div>
+</div> <!-- well -->
 
-						<div class="btn-group col-xs-3">
-							<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown">
-								<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">mmol/L</a></li>
-								<li><a href="#">umol/dL</a></li>
-							</ul>
-					</div>
-				</div>
-</br>
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="text">Sodium</label></h3>
-					</div>
-					<div class="col-xs-4">
-						<input class="form-control input-lg" type="text" id="sodium">
-					</div>
-					<div class="btn-group col-xs-3">
-						<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown">
-							<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">mmol/L</a></li>
-							<li><a href="#">umol/dL</a></li>
-						</ul>
-				</div>
-				</div>
-</br>
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="text">Urea</label></h3>
-					</div>
-					<div class="col-xs-4">
-						<input class="form-control input-lg" type="text" id="urea">
-					</div>
-					<div class="btn-group col-xs-3">
-						<button type="button" class="btn-default dropdown-toggle" data-toggle="dropdown">
-							<span data-bind="label">Select One</span>&nbsp;<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">mmol/L</a></li>
-							<li><a href="#">umol/dL</a></li>
-						</ul>
-				</div>
-				</div>
-</br>
-				<div class="row">
-					<div class="col-xs-1">
-					</div>
-					<div class="col-xs-3">
-						<h3><span for="text">INR</label></h3>
-					</div>
-					<div class="col-xs-7">
-						<input class="form-control input-lg" type="text" id="inr">
-					</div>
-				</div>
-</br>
-</br>
-
-<div id="display">
-	<div class="row">
-		<div class="col-xs-4"></div>
-		<div class="col-xs-4">
-			<div class="submit">
-				<div id="result_button" class="show">
-					<center><button type="button" id="result_button" class="btn-primary btn-lg" onClick="return gfr()">Calculate</button></center>
-				</div>
-				<!-- <div id="output" class="hidden">
-					<h2 class="flat-top text-primary">
-						<span class="label label-success col-xs-4" id="output_text"></span>
-					</h2>
-				</div> -->
-			</div> <!-- submit -->
-		</div> <!-- col-xs-12 -->
-	</div>     <!-- row -->
-</div> <!-- display -->
-
-
-
-      </div> <!-- well -->
-			<div class="well well-lg" id="output">
-				<div class="row">
-					<div class="col-xs-4"></div>
-					<div class="col-xs-4">
-					</br>
+      <div class="well well-lg" id="output">
+				<div class="center-block">
 						<h1>
 							<center><span id="output_text">...</span></center>
 						</h1>
-					</div>
 				</div>
 			</div>
 
