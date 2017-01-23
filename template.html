@@ -68,10 +68,18 @@
 	}
 
 	  function gfr(){
+      // Convert SI to C
+      // 113.12 g/mol =[umol/l]= 0.11312 mg/dl
+      var creatinine_c = (document.getElementById("creatinine_units").options.selectedIndex) ? 1 / 0.11312 : 1;
+      // 60.06 g/mol =[mmol/l]= 6.006 mg/dl
+      var urea_c = (document.getElementById("urea_units").options.selectedIndex) ? 1 / 6.006 : 1;
+      // 22.9 g/mol =[mmol/l]= 2.29 mg/dl
+      var sodium_c = (document.getElementById("sodium_units").options.selectedIndex) ? 1 / 2.29 : 1;
+
       var age = parseInt(document.getElementById("age").value, 10);
-      var creatinine = parseInt(document.getElementById("creatinine").value, 10);
-      var urea = parseInt(document.getElementById("urea").value, 10);
-      var sodium = parseInt(document.getElementById("sodium").value, 10);
+      var creatinine = parseInt(document.getElementById("creatinine").value, 10) * creatinine_c;
+      var urea = parseInt(document.getElementById("urea").value, 10) * urea_c;
+      var sodium = parseInt(document.getElementById("sodium").value, 10) * sodium_c;
       var inr = parseInt(document.getElementById("inr").value, 10);
       var female = document.getElementById('Gender_female').checked ? 0.809 : 1;
       var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
@@ -215,9 +223,8 @@
     </div>
     <div class="col-xs-3 input-lg">
       <select class="custom-select" id="creatinine_units">
-        <option selected>Units</option>
-        <option value="1">mmol/L</option>
-        <option value="2">umol/dL</option>
+        <option value="1" selected>μmol/l</option>
+        <option value="2">mg/dl</option>
       </select>
     </div>
   </div>
@@ -229,10 +236,9 @@
       <input class="form-control input-lg" type="number" name="sodium" id="sodium" min="0" max="110">
     </div>
     <div class="col-xs-3 input-lg">
-      <select class="custom-select" id="sodium_value">
-        <option selected>Units</option>
-        <option value="1">mmol/L</option>
-        <option value="2">umol/dL</option>
+      <select class="custom-select" id="sodium_units">
+        <option value="1" selected>mmol/l</option>
+        <option value="2">mg/dl</option>
       </select>
     </div>
   </div>
@@ -243,10 +249,9 @@
       <input class="form-control input-lg" type="number" name="urea" id="urea" min="0" max="110">
     </div>
     <div class="col-xs-3 input-lg">
-      <select class="custom-select" id="urea_value">
-        <option selected>Units</option>
-        <option value="1">mmol/L</option>
-        <option value="2">umol/dL</option>
+      <select class="custom-select" id="urea_units">
+        <option value="1" selected>mmol/l</option>
+        <option value="2">mg/dl</option>
       </select>
     </div>
   </div>
