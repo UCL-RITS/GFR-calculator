@@ -69,22 +69,22 @@
 
 	  function gfr(){
       // Convert SI to C
-      // 113.12 g/mol =[umol/l]= 0.11312 mg/dl
-      var creatinine_c = (document.getElementById("creatinine_units").options.selectedIndex) ? 1 / 0.11312 : 1;
+      // 113.12 g/mol =[umol/l]= 0.011312 mg/dl
+      var creatinine_c = (document.getElementById("creatinine_units").options.selectedIndex) ? 1 / 0.011312 : 1;
       // 60.06 g/mol =[mmol/l]= 6.006 mg/dl
       var urea_c = (document.getElementById("urea_units").options.selectedIndex) ? 1 / 6.006 : 1;
       // 22.9 g/mol =[mmol/l]= 2.29 mg/dl
       var sodium_c = (document.getElementById("sodium_units").options.selectedIndex) ? 1 / 2.29 : 1;
 
-      var age = parseInt(document.getElementById("age").value, 10);
-      var creatinine = parseInt(document.getElementById("creatinine").value, 10) * creatinine_c;
-      var urea = parseInt(document.getElementById("urea").value, 10) * urea_c;
-      var sodium = parseInt(document.getElementById("sodium").value, 10) * sodium_c;
-      var inr = parseInt(document.getElementById("inr").value, 10);
+      var age = document.getElementById("age").value;
+      var creatinine = document.getElementById("creatinine").value * creatinine_c;
+      var urea = document.getElementById("urea").value * urea_c;
+      var sodium = document.getElementById("sodium").value * sodium_c;
+      var inr = document.getElementById("inr").value;
       var female = document.getElementById('Gender_female').checked ? 0.809 : 1;
       var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
       var output = document.getElementById("output_text");
-      output.innerHTML = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, -0.972) * female * ascites;
+      output.innerHTML = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * female * ascites;
 
 
 			return false;
