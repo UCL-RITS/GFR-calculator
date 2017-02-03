@@ -210,21 +210,20 @@
   <div class="form-group">
     <label class="col-xs-3 control-label" for=""> units </label>
     <div class="col-xs-3">
-      <select id="units_choice" onchange="changeunits();">
+      <select class="custom-select form-control" id="units_choice" onchange="changeunits();">
         <option value="SI" selected>SI</option>
         <option value="am">C</option>
     </select></div>
   </div>
+
   <div class="form-group">
     <label class="col-xs-3 control-label" for="">Gender</label>
-    <div class="col-xs-7" id="gender">
-      <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <label class="btn btn-info">
-          <input type="radio" name="gender" id="Gender_female"> Female
-        </label>
-        <label class="btn btn-info">
-          <input type="radio" name="gender" id="Gender_male"> Male
-        </label>
+    <div class="col-xs-7 input-lg" id="gender">
+      <div class="input-group">
+        <span class="input-group-addon">
+            <input type="radio" name="gender" id="Gender_female"> Female </span>
+        <span class="input-group-addon">
+            <input type="radio" name="gender" id="Gender_male"> Male </span>
       </div>
     </div>
   </div>
@@ -240,11 +239,10 @@
 
   <div class="form-group">
     <label class="col-xs-3 control-label" for="ascites">Ascites</label>
-    <div class="col-xs-7">
-      <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <label class="btn btn-info from-check-input">
-          <input type="checkbox" name="options" id="ascites"> Moderate/Severe
-        </label>
+    <div class="col-xs-7 input-lg">
+      <div class="input-group">
+        <span class="input-group-addon"> Moderate or Severe</span>
+        <span class="input-group-addon"> <input type="checkbox" name="options" id="ascites"> Yes </span>
       </div>
     </div>
   </div>
