@@ -3,8 +3,8 @@
 <!--[if IE 8]> <html lang="en" class="lt-ie9 no-js"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-	<meta charset=utf-8 />
-	<meta name="author" content="UCL-RITS" />
+  <meta charset="UTF-8" />
+  <meta name="author" content="UCL-RITS" />
 	<meta name="description" content="GFR Calculator" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- social meta -->
@@ -78,32 +78,45 @@
 		globalSiteSpecificVars.pathToJquery = "https://static.ucl.ac.uk/indigo/js/lib/jquery-2.1.1.min";
 	}
 
+
 	  function gfr(){
+      var SI = (document.getElementById("units_choice").options.selectedIndex == 0) ? true : false;
       // Convert SI to C
       // 113.12 g/mol =[umol/l]= 0.011312 mg/dl
-      var creatinine_c = (document.getElementById("creatinine_units").options.selectedIndex) ? 1 / 0.011312 : 1;
+      var creatinine_c = SI ? 1: 1 / 0.011312;
       // 60.06 g/mol =[mmol/l]= 6.006 mg/dl
-      var urea_c = (document.getElementById("urea_units").options.selectedIndex) ? 1 / 6.006 : 1;
-      // 22.9 g/mol =[mmol/l]= 2.29 mg/dl
-      var sodium_c = (document.getElementById("sodium_units").options.selectedIndex) ? 1 / 2.29 : 1;
+      var urea_c = SI ? 1:  0.3571;
 
       var age = document.getElementById("age").value;
       var creatinine = document.getElementById("creatinine").value * creatinine_c;
       var urea = document.getElementById("urea").value * urea_c;
-      var sodium = document.getElementById("sodium").value * sodium_c;
+      var sodium = document.getElementById("sodium").value;
       var inr = document.getElementById("inr").value;
       var female = document.getElementById('Gender_female').checked ? 0.809 : 1;
       var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
       var output = document.getElementById("output_text");
-      output.innerHTML = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * female * ascites;
-
+      var result = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * female * ascites;
+      output.innerHTML = result.toLocaleString("en-GB", { maximumSignificantDigits: 3 }) + ' mL/min/1.73m<sup>2</sup>';
 
 			return false;
-	}
+	  }
 
+    var units_system = {
+       SI: {urea: "mmol/l",
+           creatinine: "μmol/l"},
+       am:{urea: "mg/dl",
+           creatinine: "mg/dl"}
+       }
+	  function changeunits(){
+       $('#units_creatinine').html(units_system[$('#units_choice').val()]['creatinine']);
+       $('#units_urea').html(units_system[$('#units_choice').val()]['urea']);
+    };
 
+    $(document).ready(function () {
+       changeunits();
+    });
 
-</script>
+  </script>
 
 <script src="https://static.ucl.ac.uk/indigo/js/lib/require.min.js"></script>
 <script src="https://static.ucl.ac.uk/indigo/js/main.js"></script>
@@ -193,8 +206,15 @@
 			<div class="well">
 </br>
 
-
 <form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for=""> units </label>
+    <div class="col-xs-3">
+      <select id="units_choice" onchange="changeunits();">
+        <option value="SI" selected>SI</option>
+        <option value="am">C</option>
+    </select></div>
+  </div>
   <div class="form-group">
     <label class="col-xs-3 control-label" for="">Gender</label>
     <div class="col-xs-7" id="gender">
@@ -210,14 +230,16 @@
   </div>
 
   <div class="form-group">
-    <label class="col-xs-3 control-label" for="">Age</label>
-    <div class="col-xs-7">
-      <input class="form-control input-lg" type="number" name="age" id="age" min="0" max="110">
-    </div>
+    <label class="col-xs-3 control-label" for="age">Age</label>
+    <div class="col-xs-7 input-lg">
+      <div class="input-group">
+      <input type="number" class="form-control" name="age" id="age" min="0" max="110" required>
+      <span class="input-group-addon" id="units_age">years</span>
+    </div></div>
   </div>
 
   <div class="form-group">
-    <label class="col-xs-3 control-label" for="">Ascites</label>
+    <label class="col-xs-3 control-label" for="ascites">Ascites</label>
     <div class="col-xs-7">
       <div class="btn-group btn-group-justified" data-toggle="buttons">
         <label class="btn btn-info from-check-input">
@@ -228,49 +250,38 @@
   </div>
 
   <div class="form-group">
-    <label class="col-xs-3 control-label" for="">Creatinine</label>
-    <div class="col-xs-4">
-      <input class="form-control input-lg" type="number" name="creatinine" id="creatinine" min="0" max="110">
-    </div>
-    <div class="col-xs-3 input-lg">
-      <select class="custom-select" id="creatinine_units">
-        <option value="1" selected>μmol/l</option>
-        <option value="2">mg/dl</option>
-      </select>
-    </div>
-  </div>
-
-
-  <div class="form-group">
-    <label class="col-xs-3 control-label" for="">Sodium</label>
-    <div class="col-xs-4">
-      <input class="form-control input-lg" type="number" name="sodium" id="sodium" min="0" max="110">
-    </div>
-    <div class="col-xs-3 input-lg">
-      <select class="custom-select" id="sodium_units">
-        <option value="1" selected>mmol/l</option>
-        <option value="2">mg/dl</option>
-      </select>
+    <label class="col-xs-3 control-label" for="creatinine">Creatinine</label>
+    <div class="col-xs-7 input-lg">
+      <div class="input-group">
+        <input class="form-control" placeholder="Normal: 0-100" type="number" name="creatinine" id="creatinine" min="0" max="150">
+        <span class="input-group-addon" id="units_creatinine"></span>
+      </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="col-xs-3 control-label" for="">Urea</label>
-    <div class="col-xs-4">
-      <input class="form-control input-lg" type="number" name="urea" id="urea" min="0" max="110">
+    <label class="col-xs-3 control-label" for="urea">Urea</label>
+    <div class="col-xs-7 input-lg">
+      <div class="input-group">
+      <input class="form-control" placeholder="Normal: 0-100" type="number" name="urea" id="urea" min="0" max="110">
+      <span class="input-group-addon" id="units_urea"></span>
+    </div></div>
     </div>
-    <div class="col-xs-3 input-lg">
-      <select class="custom-select" id="urea_units">
-        <option value="1" selected>mmol/l</option>
-        <option value="2">mg/dl</option>
-      </select>
-    </div>
+
+  <div class="form-group">
+    <label class="col-xs-3 control-label" for="sodium">Sodium</label>
+    <div class="col-xs-7 input-lg">
+      <div class="input-group">
+      <!-- <input class="form-control input-lg"> -->
+      <input  class="form-control" placeholder="Normal: 0-100" type="number" name="sodium" id="sodium" min="0" max="200">
+      <span class="input-group-addon" id="units_sodium">mmol/l</span>
+    </div></div>
   </div>
 
   <div class="form-group">
-    <label class="col-xs-3 control-label" for="">INR</label>
-    <div class="col-xs-7">
-      <input class="form-control input-lg" type="number" name="inr" id="inr" min="0" max="110">
+    <label class="col-xs-3 control-label" for="inr">INR</label>
+    <div class="col-xs-7 input-lg">
+      <input class="form-control" placeholder="Normal: 0-100" type="number" name="inr" id="inr" min="0" max="110" required>
     </div>
   </div>
 
