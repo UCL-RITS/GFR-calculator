@@ -96,8 +96,12 @@
       var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
       var output = document.getElementById("output_text");
       var result = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * female * ascites;
-      output.innerHTML = result.toLocaleString("en-GB", { maximumSignificantDigits: 3 }) + ' mL/min/1.73m<sup>2</sup>';
-
+      if (isNaN(result) | !isFinite(result)){
+        alert("One or more of your input values are not correct.");
+      }
+      else {
+        output.innerHTML = result.toLocaleString("en-GB", { maximumSignificantDigits: 3 }) + ' mL/min/1.73m<sup>2</sup>';
+      }
 			return true;
 	  }
 
@@ -223,7 +227,7 @@
         <span class="input-group-addon">
             <input type="radio" name="gender" id="Gender_female" required> Female </span>
         <span class="input-group-addon">
-            <input type="radio" name="gender" id="Gender_male"> Male </span>
+            <input type="radio" name="gender" id="Gender_male" checked> Male </span>
       </div>
     </div>
   </div>
@@ -283,7 +287,7 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary center-block btn-lg" >Calculate</button>
+  <button type="submit" class="btn btn-primary center-block btn-lg">Calculate</button>
 
 </form>
 </div> <!-- well -->
