@@ -56,7 +56,9 @@
 	<meta name="msapplication-TileImage" content="favicon-144.png">
 
 	<script src="https://static.ucl.ac.uk/indigo/js/lib/modernizr-custom.js"></script>
-
+  <script type="text/javascript" async
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 	<script type="text/javascript">
 		var cuttingTheMustard = document.querySelector && window.localStorage && window.addEventListener;
 
@@ -198,17 +200,50 @@
 
 					<article class="article">
             <center>
-						<h1>Royal Free Hospital <br> cirrhosis GFR calculator</h1>
+						  <h1>Glomerular filtration rate calculation based on the Royal Free Hospital cirrhosis GFR</h1>
             </center>
-						<p><i>... GFR introduction and disclaimer ...</i></p>
-						<p><i>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. .</i></p>
-
+						<p><i>This calculator is based on the publication by <a href="https://dx.doi.org/10.1002/hep.28891">Kalafateli et al. (2017)</a>.
+                It is only intended
+                for patients with established cirrhosis. Please note that it is not validated in
+                patients of African or Afro-American origin.</i></p>
 					</article>
+          <div class="bs">
 
-</br>
-     <div class="bs">
-			<div class="well">
-</br>
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#home">Calculator</a></li>
+              <li><a data-toggle="tab" href="#menu1">information</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <br>
+              <div id="menu1" class="tab-pane fade">
+
+                Please, cite this work as:
+                <blockquote>
+                  Kalafateli, M., Wickham, F., Burniston, M., Cholongitas, E.,
+                  Theocharidou, E., Garcovich, M., O'Beirne, J., Westbrook, R.,
+                  Leandro, G., Burroughs, A. K. and Tsochatzis, E. A. (2017),
+                  Development and validation of a mathematical equation to
+                  estimate glomerular filtration rate in cirrhosis: The royal
+                  free hospital cirrhosis glomerular filtration rate.
+                  Hepatology, 65: 582–591. doi:10.1002/hep.28891
+                </blockquote>
+                The formula is as follows: </i></p>
+
+                $$
+                \begin{eqnarray}
+                \textrm{GFR} \, \left[\frac{\textrm{m}L}{\textrm{min}\,1.73\,m^{2}}\right] & = &  45.9 \times \left( \textrm{creatinine}^{-0.836} \left[\frac{\mu \textrm{mol}}{L}\right]\right) \\
+                && \times \left( \textrm{urea}^{-0.229} \left[\frac{\textrm{mmol}}{L}\right]\right)  \times \textrm{INR}^{-0.113} \\
+                && \times \left( \textrm{age}^{-0.129} \left[ \textrm{years} \right] \right) \times \left( \textrm{sodium}^{0.972} \left[ \frac{\textrm{mmol}}{L} \right] \right) \\
+                && \times 0.809 \, (\textrm{if female}) \\
+                && \times 0.92 \, \left( \textrm{if} \, \frac{\textrm{moderate}}{\textrm{severe}} \, \textrm{ascites} \right) \
+                \end{eqnarray}
+                $$
+
+             </div>
+
+             <div id="home" class="tab-pane fade in active">
+	             <div class="well">
 
 <form class="form-horizontal" onSubmit="gfr(); return false;">
   <div class="form-group">
@@ -299,8 +334,13 @@
 						</h1>
 				</div>
 			</div>
-
-
+</div>
+</div>
+<strong>
+  Disclaimer: All information is provided for educational purposes only.
+  THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE
+  INDIVIDUAL PATIENT CARE IN ANY MANNER.
+</strong>
 
 </div>           <!-- bs -->
 
