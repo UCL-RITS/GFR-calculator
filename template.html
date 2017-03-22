@@ -119,13 +119,19 @@
 
     var units_system = {
        SI: {urea: "mmol/l",
-           creatinine: "μmol/l"},
+            urea_vals: "30",
+            creatinine: "μmol/l",
+            creatinine_vals: "400"},
        am:{urea: "mg/dl",
-           creatinine: "mg/dl"}
+           urea_vals: "84",
+           creatinine: "mg/dl",
+           creatinine_vals: "4.5"}
        }
 	  function changeunits(){
        $('#units_creatinine').html(units_system[$('#units_choice').val()]['creatinine']);
+       document.getElementById ("creatinine").placeholder = "normal values: " + units_system[$('#units_choice').val()]['creatinine_vals'] ;
        $('#units_urea').html(units_system[$('#units_choice').val()]['urea']);
+       document.getElementById ("urea").placeholder = "normal values: " + units_system[$('#units_choice').val()]['urea_vals'] ;
     };
 
     $(document).ready(function () {
@@ -328,7 +334,7 @@
                    <div class="form-group">
                      <label class="col-xs-3 control-label" for="inr">INR</label>
                      <div class="col-xs-7 input-lg">
-                       <input class="form-control" type="number" name="inr" id="inr" step="Any" required>
+                       <input class="form-control" type="number" name="inr" id="inr" step="Any" placeholder="normal values: 0.1 - 5" required>
                      </div>
                    </div>
 
