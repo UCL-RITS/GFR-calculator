@@ -104,10 +104,10 @@
       var urea = document.getElementById("urea").value * urea_c;
       var sodium = document.getElementById("sodium").value;
       var inr = document.getElementById("inr").value;
-      var female = document.getElementById('Gender_female').checked ? 0.809 : 1;
+      var male = document.getElementById('Gender_male').checked ? 1.236 : 1;
       var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
       var output = document.getElementById("output_text");
-      var result = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * female * ascites;
+      var result = 37.13 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * male * ascites;
       if (isNaN(result) | !isFinite(result)){
         alert("One or more of your input values are not correct.");
       }
@@ -248,10 +248,10 @@
 
                 $$
                 \begin{eqnarray}
-                \textrm{GFR} \, \left[\frac{\textrm{m}L}{\textrm{min}\,1.73\,m^{2}}\right] & = &  45.9 \times \left( \textrm{creatinine}^{-0.836} \left[\frac{\mu \textrm{mol}}{L}\right]\right) \\
+                \textrm{GFR} \, \left[\frac{\textrm{m}L}{\textrm{min}\,1.73\,m^{2}}\right] & = &  37.13 \times \left( \textrm{creatinine}^{-0.836} \left[\frac{\mu \textrm{mol}}{L}\right]\right) \\
                 && \times \left( \textrm{urea}^{-0.229} \left[\frac{\textrm{mmol}}{L}\right]\right)  \times \textrm{INR}^{-0.113} \\
                 && \times \left( \textrm{age}^{-0.129} \left[ \textrm{years} \right] \right) \times \left( \textrm{sodium}^{0.972} \left[ \frac{\textrm{mmol}}{L} \right] \right) \\
-                && \times 0.809 \, (\textrm{if female}) \\
+                && \times 1.236 \, (\textrm{if male}) \\
                 && \times 0.92 \, \left( \textrm{if} \, \frac{\textrm{moderate}}{\textrm{severe}} \, \textrm{ascites} \right) \
                 \end{eqnarray}
                 $$
