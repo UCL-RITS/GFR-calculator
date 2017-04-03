@@ -1,31 +1,435 @@
-<!doctype html>
-<title>GFR Calculator coming soon!</title>
-<style>
-  body { text-align: center; padding: 50px; }
-  h1 { font-size: 50px; }
-  body { font: 20px Helvetica, sans-serif; color: #333; }
-  article { display: block; text-align: left; width: 750px; margin: 0 auto; }
-  a { color: #dc8100; text-decoration: none; }
-  a:hover { color: #333; text-decoration: none; }
-  .footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
-  font-size: 15px;
-}
-</style>
+<!DOCTYPE html>
+<!--[if IE 7]> <html lang="en" class="lt-ie9 lt-ie8 no-js"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="lt-ie9 no-js"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="UCL-RITS" />
+	<meta name="description" content="GFR Calculator" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- social meta -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@uclnews">
+	<meta name="twitter:title" content="UCL - London's Global University">
+	<meta name="twitter:description" content="UCL (University College London) is London's leading multidisciplinary university, with 8,000 staff and 25,000 students.">
+	<meta name="twitter:creator" content="@UCLWAMS">
+	<meta name="twitter:image:src" content="http://www.ucl.ac.uk/visual-identity/logos/standalone.png">
+	<meta property="og:image" content="http://www.ucl.ac.uk/visual-identity/logos/standalone.png"/>
+	<meta property="og:title" content="UCL - London's Global University"/>
+	<meta property="og:url" content="http://www.ucl.ac.uk"/>
+	<meta property="og:site_name" content="UCL"/>
+	<meta property="og:description" content="UCL (University College London) is London's leading multidisciplinary university, with 8,000 staff and 25,000 students."/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:profile_id" content="uclofficial"/>
+	<!-- end social meta -->
+	<title>GFR Calculator</title>
 
-<article>
-    <h1>GFR Calculator coming soon!</h1>
-    <div>
-    <p>This website will host the <strong>Royal London Free Hospital's Glomerular Filtration Rate (GFR) calculator</strong> for patients with cirrhosis.
-    <p>Sorry for the inconvenience, but this website is currently under construction and will be ready by the end of <strong>January 2017</strong>. If you need to, you can <a href="mailto:rc-softdev@ucl.ac.uk">contact us</a>.</p>
-    <div class="footer">Powered by the <a href="https://www.royalfree.nhs.uk">Royal Free London NHS Foundation Trust</a> and the <a href="https://www.ucl.ac.uk/research-it-services/research-software-development">UCL Research Software Development Group</a>.</div>
-    </div>
-</article>
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91334494-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+	<!-- Including bootstrap -->
+  <!-- jquery are required by bootstrap -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- end of jquery -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/main.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- end of bootstrap -->
+
+	<link href="https://static.ucl.ac.uk/indigo/css/screen.min.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+	<!--[if IE]><link href="https://static.ucl.ac.uk/indigo/css/ie.min.css" rel="stylesheet" /><![endif]-->
+	<!--[if lt IE 8]><link href="https://static.ucl.ac.uk/indigo/css/ie-old.min.css" rel="stylesheet" /><![endif]-->
+
+	<link rel="shortcut icon" href="https://static.ucl.ac.uk/indigo/images/favicon.ico" />
+	<link rel="apple-touch-icon-precomposed" href="favicon-152.png">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="msapplication-TileImage" content="favicon-144.png">
+
+	<script src="https://static.ucl.ac.uk/indigo/js/lib/modernizr-custom.js"></script>
+  <script type="text/javascript" async
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <script>
+    function UCLYear() {
+    var d = new Date();
+    var n = d.getFullYear();
+    document.getElementById("year").innerHTML = n;
+    }
+  </script>
 
 
+	<script type="text/javascript">
+		var cuttingTheMustard = document.querySelector && window.localStorage && window.addEventListener;
+
+		Modernizr.load({
+		//cutting the mustard as used by the BBC
+		test : cuttingTheMustard
+		//if old browser load the shiv
+		,nope : [
+		'//static.ucl.ac.uk/indigo/js/lib/html5shiv-printshiv.min.js'
+		,'//static.ucl.ac.uk/indigo/js/lib/respond.min.js'
+		]
+	});
+	//set conditional assets for main.js
+	var globalSiteSpecificVars = {
+		pathToJquery: '//static.ucl.ac.uk/indigo/js/lib/jquery-1.9.1.min'
+		,googleAnalyticsIdsArray: []//specify array of site specific id's NOT UCL generic UA-943297-1
+	}
+	if(cuttingTheMustard){
+		globalSiteSpecificVars.pathToJquery = "https://static.ucl.ac.uk/indigo/js/lib/jquery-2.1.1.min";
+	}
+
+
+	  function gfr(){
+      var SI = (document.getElementById("units_choice").options.selectedIndex == 0) ? true : false;
+      // Convert SI to C
+      // 113.12 g/mol =[umol/l]= 0.011312 mg/dl
+      var creatinine_c = SI ? 1: 1 / 0.011312;
+      // 60.06 g/mol =[mmol/l]= 6.006 mg/dl
+      var urea_c = SI ? 1:  0.3571;
+
+      var age = document.getElementById("age").value;
+      var creatinine = document.getElementById("creatinine").value * creatinine_c;
+      var urea = document.getElementById("urea").value * urea_c;
+      var sodium = document.getElementById("sodium").value;
+      var inr = document.getElementById("inr").value;
+      var male = document.getElementById('Gender_male').checked ? 1.236 : 1;
+      var ascites = document.getElementById('ascites').checked ? 0.92 : 1;
+      var output = document.getElementById("output_text");
+      var result = 45.9 * Math.pow(creatinine, -0.836) * Math.pow(urea, -0.229) * Math.pow(inr, -0.113) * Math.pow(age, -0.129) * Math.pow(sodium, 0.972) * male * ascites;
+      if (isNaN(result) | !isFinite(result)){
+        alert("One or more of your input values are not correct.");
+      }
+      else {
+        output.innerHTML = result.toLocaleString("en-GB", { maximumSignificantDigits: 3 }) + ' mL/min/1.73m<sup>2</sup>';
+      }
+			return true;
+	  }
+
+    var units_system = {
+       SI: {urea: "mmol/l",
+            urea_vals: "30",
+            creatinine: "μmol/l",
+            creatinine_vals: "400"},
+       am:{urea: "mg/dl",
+           urea_vals: "84",
+           creatinine: "mg/dl",
+           creatinine_vals: "4.5"}
+       }
+	  function changeunits(){
+       $('#units_creatinine').html(units_system[$('#units_choice').val()]['creatinine']);
+       document.getElementById ("creatinine").max = units_system[$('#units_choice').val()]['creatinine_vals'] ;
+       $('#units_urea').html(units_system[$('#units_choice').val()]['urea']);
+       document.getElementById ("urea").max = units_system[$('#units_choice').val()]['urea_vals'] ;
+    };
+
+    $(document).ready(function () {
+       changeunits();
+    });
+
+  </script>
+
+<script src="https://static.ucl.ac.uk/indigo/js/lib/require.min.js"></script>
+<script src="https://static.ucl.ac.uk/indigo/js/main.js"></script>
+<script>
+	require(["app/general","app/searchWithAutoComplete"]);//load the default stuff
+</script>
+
+</head>
+
+<body id="index" class="layout-vertical layout-vertical--nav-2col
+" onload="UCLYear()">
+
+	<header class="header header--desktop">
+
+		<a class="header__close" href="#"><img src="https://cdn.ucl.ac.uk/indigo/images/close.png" alt="X" />Close</a>
+
+		<div class="masthead">
+
+			<div class="wrapper clearfix">
+
+				<div class="masthead__search">
+					<form action="https://search2.ucl.ac.uk/s/search.html" method="get">
+						<div class="search-form">
+							<input type="search" name="query" placeholder="Search UCL websites, degrees, short courses, people and more" class="search-form__input search-form__input--search" value="">
+						</div>
+						<input type="hidden" name="collection" value="website-meta">
+		                <input type="hidden" name="profile" value="_website">
+		                <input type="hidden" name="tab" value="websites">
+		                <input type="submit" name="submit" value="Go" class="btn btn--primary search-form__input search-form__input--submit" />
+					</form>
+				</div>
+
+
+				<nav class="masthead__nav m-clear">
+                    <ul class="masthead__list">
+                        <li class="masthead__item"><a href="https://www.ucl.ac.uk/" class="masthead__link">UCL Home</a>
+                        </li>
+                        <li class="masthead__item"><a href="https://www.ucl.ac.uk/prospective-students/" class="masthead__link">Prospective students</a>
+                        </li>
+                        <li class="masthead__item"><a href="https://www.ucl.ac.uk/students/" class="masthead__link">Current students</a>
+                        </li>
+                        <li class="masthead__item"><a href="https://www.ucl.ac.uk/staff/" class="masthead__link">Staff</a>
+                        </li>
+                    </ul>
+                </nav>
+			</div>
+
+		</div><!-- end .masthead -->
+
+		<div class="wrapper">
+
+			<div class="photograph">
+				<div class="brand">
+					<p class="brand__heading">RFH Cirrhosis GFR Calculator</p>
+					<a href="/" class="brand__link"><span class="visually-hidden">Home</span></a>
+						<img src="https://cdn.ucl.ac.uk/indigo/images/ucl-logo.svg" alt="UCL logo" id="logo" class="brand__logo">
+				</div>
+				<p class="photograph__description"></p>
+			</div><!-- end .photograph -->
+
+		</div> <!-- end .wrapper -->
+
+	</header><!-- end .header -->
+
+
+	<div class="site-content wrapper">
+
+		<div class="site-content__inner clearfix">
+
+			<div class="site-content__body">
+
+				<!-- start main slot where silva content gets rendered-->
+
+				<div class="site-content__main">
+
+					<article class="article">
+            <center>
+						  <h1>Glomerular Filtration Rate calculation based on the Royal Free Hospital cirrhosis GFR</h1>
+            </center>
+						<p><i>This calculator is based on the publication by <a href="https://dx.doi.org/10.1002/hep.28891">Kalafateli et al. (Hepatology 2017; 65:582-91)</a>.
+                It is only intended
+                for patients with established cirrhosis. Please note that it is not validated in
+                patients of African or Afro-American origin.</i></p>
+					</article>
+          <div class="bs">
+
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#home">Calculator</a></li>
+              <li><a data-toggle="tab" href="#menu1">Information</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <br>
+              <div id="menu1" class="tab-pane fade">
+
+                Please, cite this work as:
+                <blockquote>
+                  Kalafateli, M., Wickham, F., Burniston, M., Cholongitas, E.,
+                  Theocharidou, E., Garcovich, M., O'Beirne, J., Westbrook, R.,
+                  Leandro, G., Burroughs, A. K. and Tsochatzis, E. A. (2017),
+                  Development and validation of a mathematical equation to
+                  estimate glomerular filtration rate in cirrhosis: The Royal
+                  Free Hospital cirrhosis glomerular filtration rate.
+                  Hepatology, 65: 582–591. doi:10.1002/hep.28891
+                </blockquote>
+                The formula is as follows: </i></p>
+
+                $$
+                \begin{eqnarray}
+                \textrm{GFR} \, \left[\frac{\textrm{m}L}{\textrm{min}\,1.73\,m^{2}}\right] & = &  45.9 \times \left( \textrm{creatinine}^{-0.836} \left[\frac{\mu \textrm{mol}}{L}\right]\right) \\
+                && \times \left( \textrm{urea}^{-0.229} \left[\frac{\textrm{mmol}}{L}\right]\right)  \times \textrm{INR}^{-0.113} \\
+                && \times \left( \textrm{age}^{-0.129} \left[ \textrm{years} \right] \right) \times \left( \textrm{sodium}^{0.972} \left[ \frac{\textrm{mmol}}{L} \right] \right) \\
+                && \times 1.236 \, (\textrm{if male}) \\
+                && \times 0.92 \, \left( \textrm{if} \, \frac{\textrm{moderate}}{\textrm{severe}} \, \textrm{ascites} \right) \
+                \end{eqnarray}
+                $$
+
+             </div>
+
+             <div id="home" class="tab-pane fade in active">
+	             <div class="well">
+
+                 <form class="form-horizontal" onSubmit="gfr(); return false;">
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for=""> Units </label>
+                     <div class="col-xs-3">
+                       <select class="custom-select form-control" id="units_choice" onchange="changeunits();">
+                         <option value="SI" selected>SI</option>
+                         <option value="am">C (US)</option>
+                     </select></div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="">Gender</label>
+                     <div class="col-xs-7 input-lg" id="gender">
+                       <div class="input-group">
+                         <span class="input-group-addon">
+                           <input type="radio" name="gender" id="Gender_female" required> Female </span>
+                         <span class="input-group-addon">
+                           <input type="radio" name="gender" id="Gender_male" checked> Male </span>
+                       </div>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="age">Age</label>
+                     <div class="col-xs-7 input-lg">
+                       <div class="input-group">
+                         <input type="number" class="form-control" name="age" id="age" min="18" max="100" required>
+                         <span class="input-group-addon" id="units_age">years</span>
+                     </div></div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="ascites">Ascites</label>
+                     <div class="col-xs-7 input-lg">
+                       <div class="input-group">
+                         <span class="input-group-addon"> Moderate or Severe</span>
+                         <span class="input-group-addon"> <input type="checkbox" name="options" id="ascites"> Yes </span>
+                       </div>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="creatinine">Creatinine</label>
+                     <div class="col-xs-7 input-lg">
+                       <div class="input-group">
+                         <input class="form-control" type="number" name="creatinine" id="creatinine" step="Any" required>
+                         <span class="input-group-addon" id="units_creatinine"></span>
+                       </div>
+                     </div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="urea">Urea</label>
+                     <div class="col-xs-7 input-lg">
+                       <div class="input-group">
+                         <input class="form-control" type="number" name="urea" id="urea" step="Any" required>
+                         <span class="input-group-addon" id="units_urea"></span>
+                     </div></div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="sodium">Sodium</label>
+                     <div class="col-xs-7 input-lg">
+                       <div class="input-group">
+                         <!-- <input class="form-control input-lg"> -->
+                         <input  class="form-control" type="number" name="sodium" id="sodium" min="110" max="160" step="Any" required>
+                         <span class="input-group-addon" id="units_sodium">mmol/l</span>
+                     </div></div>
+                   </div>
+
+                   <div class="form-group">
+                     <label class="col-xs-3 control-label" for="inr">INR</label>
+                     <div class="col-xs-7 input-lg">
+                       <input class="form-control" type="number" name="inr" id="inr" step="Any" min="0.1" max="5" step="Any" required>
+                     </div>
+                   </div>
+
+                   <button type="submit" class="btn btn-primary center-block btn-lg">Calculate</button>
+
+                 </form>
+
+               </div> <!-- well -->
+
+               <div class="well well-lg" id="output">
+				         <div class="center-block">
+						       <h1>
+							       <center><span id="output_text">...</span></center>
+						       </h1>
+				         </div>
+			         </div> <!-- small well -->
+             </div>   <!-- tab / home -->
+
+            </div> <!-- tab-content -->
+
+            <strong>
+              Disclaimer: All information is provided for educational purposes only.
+              THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE
+              INDIVIDUAL PATIENT CARE IN ANY MANNER.
+            </strong>
+
+          </div> <!-- bs -->
+
+          <br/>
+
+          <div class="box">
+            Developed with ♥ by the UCL's <a href="https://www.ucl.ac.uk/research-it-services/research-software-development">Research Software Development Group.</a>
+          </div>
+
+        </div> <!-- end main slot where silva content gets rendered-->
+
+			</div> <!-- site-content body -->
+
+		</div> <!-- site-content inner -->
+
+	</div><!-- end .site-content -->
+
+    <footer class="footer wrapper">
+        <div class="footer__inner clearfix">
+          <article class="block block--col-1">
+            <h2 class="as-h5">Facilities</h2>
+            <ul class="footer__list list-unstyled">
+					    <li class="footer__item"><a href="http://www.ucl.ac.uk/departments/faculties">Faculties and departments</a></li>
+					    <li class="footer__item"><a href="http://www.ucl.ac.uk/library/">Library</a></li>
+					    <li class="footer__item"><a href="http://www.ucl.ac.uk/museums">Museums and Collections</a></li>
+					    <li class="footer__item"><a href="http://www.thebloomsbury.com/">UCL Bloomsbury Theatre</a></li>
+					    <li class="footer__item"><a href="http://www.ucl.ac.uk/maps">Maps and buildings</a></li>
+				    </ul>
+            </article>
+            <article class="block block--col-2">
+              <h2 class="as-h5">Locations</h2>
+              <ul class="footer__list list-unstyled">
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/london">UCL and London</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/australia">UCL Australia</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/qatar">UCL Qatar</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/global">UCL Global</a></li>
+				      </ul>
+            </article>
+            <article class="block block--col-3">
+              <h2 class="as-h5">Connect with us</h2>
+              <ul class="footer__list list-unstyled">
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/alumni">Alumni</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/enterprise">Businesses</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/media">Media Relations</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/hr/jobs/">Jobs</a></li>
+					      <li class="footer__item"><a href="http://www.ucl.ac.uk/makeyourmark">Give to UCL</a></li>
+				      </ul>
+            </article>
+            <hr class="clear">
+            <ul class="footer__list list-unstyled zero-bottom">
+                <li class="footer__item text-muted small">University College London,&nbsp;Gower Street,&nbsp;London,&nbsp;WC1E 6BT&nbsp;Tel:&nbsp;+44&nbsp;(0)&nbsp;20 7679 2000</li>
+            </ul>
+            <ul class="list-inline footer__list list-unstyled list-inline--divided">
+                <li class="text-muted small">Copyright © <span id='year'>2017</span> UCL</li>
+                <li class="text-muted small"><a href="#">Disclaimer</a>
+                </li>
+                <li class="text-muted small"><a href="#">Freedom of Information</a>
+                </li>
+                <li class="text-muted small"><a href="#">Accessibility</a>
+                </li>
+                <li class="text-muted small"><a href="#">Privacy</a>
+                </li>
+                <li class="text-muted small"><a href="#">Cookies</a>
+                </li>
+                <li class="text-muted small"><a href="#">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+
+</body>
+</html>
